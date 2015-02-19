@@ -63,12 +63,17 @@
             return $this->content;
         }
 
+        if (has_any_capability(array('block/rss_client:manageanyfeeds', 'block/rss_client:manageownfeeds'), $this->context)) {
+            $url = new moodle_url('/blocks/rss_client/managefeeds.php', array('courseid' => $this->page->course->id));
+            $this->content->text .= html_writer::div(html_writer::link($url, get_string('feedsaddedit', 'block_rss_client')), 'newlink');
+        }
+
         if (!isset($this->config)) {
             // The block has yet to be configured - just display configure message in
             // the block if user has permission to configure it
 
             if (has_capability('block/rss_client:manageanyfeeds', $this->context)) {
-                $this->content->text = get_string('feedsconfigurenewinstance2', 'block_rss_client');
+                $this->content->text .= get_string('feedsconfigurenewinstance2', 'block_rss_client');
             }
 
             return $this->content;
@@ -106,7 +111,7 @@
             }
         }
 
-        $this->content->text = $output;
+        $this->content->text .= $output;
 
         return $this->content;
     }

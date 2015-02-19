@@ -63,12 +63,6 @@ class block_rss_client_edit_form extends block_edit_form {
                     get_string('nofeeds', 'block_rss_client'));
         }
 
-        if (has_any_capability(array('block/rss_client:manageanyfeeds', 'block/rss_client:manageownfeeds'), $this->block->context)) {
-            $mform->addElement('static', 'nofeedmessage', '',
-                    '<a href="' . $CFG->wwwroot . '/blocks/rss_client/managefeeds.php?courseid=' . $this->page->course->id . '">' .
-                    get_string('feedsaddedit', 'block_rss_client') . '</a>');
-        }
-
         $mform->addElement('text', 'config_title', get_string('uploadlabel'));
         $mform->setType('config_title', PARAM_NOTAGS);
 
