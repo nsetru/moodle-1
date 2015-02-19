@@ -78,7 +78,10 @@ $feeds = $DB->get_records_select('block_rss_client', $select, null, $DB->sql_ord
 
 $strmanage = get_string('managefeeds', 'block_rss_client');
 
-$PAGE->set_pagelayout('standard');
+//-- niv
+//$PAGE->set_pagelayout('standard');
+$PAGE->set_pagelayout('popup');
+//---
 $PAGE->set_title($strmanage);
 $PAGE->set_heading($strmanage);
 

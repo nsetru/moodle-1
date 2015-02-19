@@ -30,7 +30,7 @@
  */
 class block_rss_client_edit_form extends block_edit_form {
     protected function specific_definition($mform) {
-        global $CFG, $DB, $USER;
+        global $CFG, $DB, $USER, $OUTPUT;
 
         // Fields for editing block contents.
         $mform->addElement('header', 'configheader', get_string('blocksettings', 'block'));
@@ -63,10 +63,32 @@ class block_rss_client_edit_form extends block_edit_form {
                     get_string('nofeeds', 'block_rss_client'));
         }
 
-        if (has_any_capability(array('block/rss_client:manageanyfeeds', 'block/rss_client:manageownfeeds'), $this->block->context)) {
+        // --niv
+        /*if (has_any_capability(array('block/rss_client:manageanyfeeds', 'block/rss_client:manageownfeeds'), $this->block->context)) {
             $mform->addElement('static', 'nofeedmessage', '',
                     '<a href="' . $CFG->wwwroot . '/blocks/rss_client/managefeeds.php?courseid=' . $this->page->course->id . '">' .
                     get_string('feedsaddedit', 'block_rss_client') . '</a>');
+        }*/
+
+        if (has_any_capability(array('block/rss_client:manageanyfeeds', 'block/rss_client:manageownfeeds'), $this->block->context)) {
+            $options = array();
+            $options['menubar'] = 0;
+            $options['location'] = 0;
+            $options['left'] = 5;
+            $options['top'] = 5;
+            $options['scrollbars'] = 1;
+            $options['resizable'] = 1;
+            $options['width'] = 200;
+            $options['height'] = 200;
+
+            $url = $CFG->wwwroot .'/blocks/rss_client/managefeeds.php?courseid=' . $this->page->course->id;
+            $label =  $OUTPUT->action_link(
+                    $url,
+                    get_string('feedsaddedit', 'block_rss_client'),
+                    new popup_action('click', $url, 'managefeeds', $options),
+                    array('title'=>get_string('newwindow')));
+            $mform->addElement('static', 'nofeedmessage', '', $label);
+
         }
 
         $mform->addElement('text', 'config_title', get_string('uploadlabel'));

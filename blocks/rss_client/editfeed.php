@@ -176,7 +176,10 @@ if ($returnurl) {
 $managefeeds = new moodle_url('/blocks/rss_client/managefeeds.php', $urlparams);
 
 $PAGE->set_url('/blocks/rss_client/editfeed.php', $urlparams);
-$PAGE->set_pagelayout('admin');
+// --niv
+//$PAGE->set_pagelayout('admin');
+$PAGE->set_pagelayout('popup');
+// --
 
 if ($rssid) {
     $isadding = false;
