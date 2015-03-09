@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Add menus and sub-menus within site-administration blocks
+ * Add UCL Tools menu and sub-menus within site-administration block
  *
  * @package local_ucl_tools
  * @subpackage  ucl_tools

@@ -27,7 +27,9 @@ require_once(__DIR__ . '/../../../config.php');
 require_once($CFG->dirroot . '/local/ucl_tools/quiz_reset/quiz_attempt_reset_form.php');
 require_once($CFG->dirroot . '/local/ucl_tools/quiz_reset/lib.php');
 
-$id = optional_param('attemptid', '', PARAM_INT);
+// we need quiz attempt id and course id to set and display quiz attempt state
+$attempt_id = optional_param('attempt', '', PARAM_INT);
+$course_id = optional_param('course', '', PARAM_INT);
 
 $syscontext = context_system::instance();
 
@@ -41,7 +43,7 @@ $PAGE->set_pagelayout('admin');
 $PAGE->set_title(get_string('pluginname','local_ucl_tools'));
 $PAGE->set_heading('UCL Tools - Quiz attempt reset');
 
-if()
+
 // initiate form
 $quiz_reset_form = new quiz_attempt_reset_form();
 
@@ -49,28 +51,31 @@ $content = '';
 
 echo $OUTPUT->header();
 
-// display form for user to enter course shortname
+// update quiz from 'abandoned' state to 'progress' state
+if(isset($attempt_id)) {
+    local_ucl_tools_updatequizattempt($attempt_id);
+}
+
+// display form for the user to enter course shortname
+echo $OUTPUT->box_start('generalbox boxaligncenter boxwidthwide');
 $content .= $quiz_reset_form->display();
+echo $OUTPUT->box_end();
+
+// process form data
 if ($formdata = $quiz_reset_form->get_data()) {
-    $content .= 'formadata';
     $shortname = $formdata->courseshortname;
-    $quizzes = local_ucl_tools_quizresetgetquizzes($shortname);
-    foreach($quizzes as $quiz) {
+    $course = $DB->get_record('course', array('shortname' => $shortname));
 
-        // display quiz names found within course
-        $content .= html_writer::start_tag('h3', array('class'=>'title'));
-        $content .= $quiz->name;
-        $content .= html_writer::end_tag('h3');
+    // get quiz attempt data to display
+    $content .= local_ucl_tools_getquizattempts($course->id);
 
-        // get all abandoned quiz attempts for a quiz
-        $quiz_attempts = $DB->get_records('quiz_attempts', array('quiz' => $quiz->id, 'state' => 'abandoned'));
-
-        // display html table, listing abandoned quiz attempts
-        $quizattempts_table = local_ucl_tools_printquizattemptstable($quiz_attempts, $quiz);
-        $content .= html_writer::table($quizattempts_table);
-
+} else {
+    if(isset($course_id)) {
+        // get quiz attempt data to display
+        $content .= local_ucl_tools_getquizattempts($course_id);
     }
 }
+
 echo $content;
 echo $OUTPUT->footer();
 

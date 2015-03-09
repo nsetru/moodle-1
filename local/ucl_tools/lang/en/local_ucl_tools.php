@@ -25,7 +25,11 @@
 
 $string['pluginname'] = 'UCL Tools';
 
-//quiz_reset forms
-$string['courseshortname'] = 'Enter course shortname';
-$string['courseshortname_help'] = 'Course shortname help';
+// quiz_reset forms
+$string['courseshortname'] = 'Course shortname';
+$string['courseshortname_help'] = "<p>Enter course shortname and click 'Search' button.</p> <p> This lists all available quizzes in course with attempts stuck in 'Never submitted' state</p>";
 $string['search'] = 'Search';
+
+// quiz tables
+$string['updatequiz'] = 'Update quiz attempt state';
+$string['stateabandoned'] = 'Never submitted';
