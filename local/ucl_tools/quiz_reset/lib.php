@@ -34,6 +34,7 @@ function local_ucl_tools_getquizattempts($courseid) {
     foreach ($quizzes as $quiz) {
 
         // Display quiz names found within course.
+        $content .= '<hr>';
         $content .= html_writer::start_tag('h3', array('class' => 'title'));
         $content .= $quiz->name;
         $content .= html_writer::end_tag('h3');
@@ -66,27 +67,35 @@ function local_ucl_tools_printquizattemptstable($quizattempts, $quiz) {
 
     $namefields = get_all_user_name_fields(true);
     $stredit = get_string('updatequiz', 'local_ucl_tools');
+    $strview = get_string('viewprofile', 'local_ucl_tools');
+
     foreach ($quizattempts as $quizattempt) {
         $user = $DB->get_record('user', array('id' => $quizattempt->userid), 'id, ' . $namefields . ', username, email');
         $user->fullname = fullname($user, true);
 
         // Build link to update quiz attempt state.
-        $linkparams = array('attempt' => $quizattempt->id, 'course' => $quiz->course);
-        $updatelink = new moodle_url($CFG->wwwroot . '/local/ucl_tools/quiz_reset/index.php', $linkparams);
-
+        $updatelinkparams = array('attempt' => $quizattempt->id, 'course' => $quiz->course);
+        $updatelink = new moodle_url($CFG->wwwroot . '/local/ucl_tools/quiz_reset/index.php', $updatelinkparams);
         // Image to be displayed in the table cell.
         $imgsrc = html_writer::empty_tag('img', array('src' => $OUTPUT->pix_url('t/edit'), 'alt' => $stredit, 'class' => 'iconsmall'));
-
         $updatebutton = html_writer::link($updatelink, $imgsrc, array('title' => $stredit));
+
+        // Build link to view user profile.
+        $viewlinkparams = array('id' => $user->id, 'course' => 1);
+        $viewlink = new moodle_url($CFG->wwwroot . '/user/view.php', $viewlinkparams);
+        $viewlinkimg = html_writer::empty_tag('img', array('src' => $OUTPUT->pix_url('t/hide'), 'alt' => $strview, 'class' => 'iconsmall'));
+        $viewprofilebutton = html_writer::link($viewlink, $viewlinkimg, array('title' => $strview));
+
         $table->data[] = array(
             $quiz->name,
-            $user->fullname,
+            $user->fullname. $viewprofilebutton,
             $user->email,
             get_string('stateabandoned', 'local_ucl_tools'),
             $updatebutton
         );
     }
     return $table;
+    //html_writer::link(new moodle_url($returnurl, array('unsuspend'=>$user->id, 'sesskey'=>sesskey())), html_writer::empty_tag('img', array('src'=>$OUTPUT->pix_url('t/show'), 'alt'=>$strunsuspend, 'class'=>'iconsmall')), array('title'=>$strunsuspend));
 }
 
 function local_ucl_tools_updatequizattempt($attemptid) {
