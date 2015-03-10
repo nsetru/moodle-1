@@ -17,12 +17,12 @@
 /**
  * Add UCL tools menu and sub-menus within site-administration block
  *
- * @package local_ucl_tools
+ * @package     local_ucl_tools
  * @subpackage  ucl_tools
  * @copyright   2014, Nivedita Setru <n.setru@ucl.ac.uk>
- * @license http://www.ucl.ac.uk
+ * @license     http://www.ucl.ac.uk
  */
 
 $ADMIN->add('root', new admin_category('ucl_tools', get_string('ucltools', 'local_ucl_tools')));
 $ADMIN->add('ucl_tools', new admin_externalpage('quiz_reset', get_string('quizreset', 'local_ucl_tools'),
-    $CFG->wwwroot.'/local/ucl_tools/quiz_reset/index.php'));
+    $CFG->wwwroot . '/local/ucl_tools/quiz_reset/index.php'));

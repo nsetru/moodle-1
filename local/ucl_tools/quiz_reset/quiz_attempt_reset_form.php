@@ -17,25 +17,28 @@
 /**
  * Form to reset never-submitted/abandoned quiz attempts
  *
- * @package local_ucl_tools
+ * @package     local_ucl_tools
  * @subpackage  ucl_tools
  * @copyright   2014, Nivedita Setru <n.setru@ucl.ac.uk>
- * @license http://www.ucl.ac.uk
+ * @license     http://www.ucl.ac.uk
  */
 
 if (!defined('MOODLE_INTERNAL')) {
-    die('Direct access to this script is forbidden.');    //  It must be included from a Moodle page
+    die('Direct access to this script is forbidden.');    //  It must be included from a Moodle page.
 }
 
 require_once($CFG->libdir . '/formslib.php');
 
-class quiz_attempt_reset_form extends moodleform {
-
-    function definition() {
+class quiz_attempt_reset_form extends moodleform
+{
+    /**
+     * Define this form - called from the parent constructor
+     */
+    public function definition() {
 
         $mform = $this->_form;
 
-        $mform->addElement('text', 'courseshortname', get_string('courseshortname','local_ucl_tools'));
+        $mform->addElement('text', 'courseshortname', get_string('courseshortname', 'local_ucl_tools'));
         $mform->addHelpButton('courseshortname', 'courseshortname', 'local_ucl_tools');
         $mform->addRule('courseshortname', get_string('required'), 'required', null, 'client');
         $mform->setType('courseshortname', PARAM_TEXT);

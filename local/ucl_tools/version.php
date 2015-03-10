@@ -17,10 +17,10 @@
 /**
  * Version Information
  *
- * @package local_ucl_tools
+ * @package     local_ucl_tools
  * @subpackage  ucl_tools
  * @copyright   2014, Nivedita Setru <n.setru@ucl.ac.uk>
- * @license http://www.ucl.ac.uk
+ * @license     http://www.ucl.ac.uk
  */
 
 defined('MOODLE_INTERNAL') || die;

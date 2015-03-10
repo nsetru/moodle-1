@@ -17,23 +17,25 @@
 /**
  * Language strings
  *
- * @package local_ucl_tools
+ * @package     local_ucl_tools
  * @subpackage  ucl_tools
  * @copyright   2014, Nivedita Setru <n.setru@ucl.ac.uk>
- * @license http://www.ucl.ac.uk
+ * @license     http://www.ucl.ac.uk
  */
 
 $string['pluginname'] = 'UCL tools';
 
-// menu and sub-menu names in site administration block
+// Menu and sub-menu names in site administration block.
 $string['ucltools'] = 'UCL tools';
 $string['quizreset'] = 'Reset quiz attempts';
 
-// quiz_reset forms
+// Language strings for quiz_reset.
+
+// Form.
 $string['courseshortname'] = 'Course shortname';
 $string['courseshortname_help'] = "<p>Enter course shortname and click 'Search' button.</p> <p> This lists all quiz attempts stuck in 'Never submitted' state for each quiz activity in a course</p>";
 $string['search'] = 'Search';
 
-// quiz tables
+// Table.
 $string['updatequiz'] = 'Update quiz attempt state';
 $string['stateabandoned'] = 'Never submitted';
