@@ -24,20 +24,40 @@
  * @license     http://www.ucl.ac.uk
  */
 
+/**
+ * @param $courseid
+ *
+ * @return string
+ * @throws coding_exception
+ */
 function local_ucl_tools_getquizattempts($courseid) {
-    global $DB;
+    global $CFG, $DB;
 
     $content = '';
 
     $quizzes = $DB->get_records('quiz', array('course' => $courseid));
 
+    $course = $DB->get_record('course', array('id' => $courseid));
+
+    $content .= '<hr>';
+
+    // Build link to view course.
+    $strcourseview = get_string('viewcourse', 'local_ucl_tools');
+    $courselink = new moodle_url($CFG->wwwroot . '/course/view.php', array('id' => $courseid));
+    $coursefullname = $course->fullname;
+
+    // Display course fullname.
+    $content .= html_writer::start_tag('h3', array('class' => 'title'));
+    $content .=  html_writer::link($courselink, $coursefullname, array('title' => $strcourseview));
+    $content .= html_writer::end_tag('h3');
+
     foreach ($quizzes as $quiz) {
 
-        // Display quiz names found within course.
         $content .= '<hr>';
-        $content .= html_writer::start_tag('h3', array('class' => 'title'));
+        // Display quiz names found within course.
+        $content .= html_writer::start_tag('h4', array('class' => 'title'));
         $content .= $quiz->name;
-        $content .= html_writer::end_tag('h3');
+        $content .= html_writer::end_tag('h4');
 
         // Get all abandoned quiz attempts for a quiz.
         $quizattempts = $DB->get_records('quiz_attempts', array('quiz' => $quiz->id, 'state' => 'abandoned'));
@@ -47,15 +67,22 @@ function local_ucl_tools_getquizattempts($courseid) {
             $quizattemptstable = local_ucl_tools_printquizattemptstable($quizattempts, $quiz);
             $content .= html_writer::table($quizattemptstable);
         } else {
-            $content .= html_writer::start_tag('h5', array('class' => 'title'));
+            $content .= html_writer::start_tag('b', array());
             $content .= 'No quiz attempts in Never submitted state';
-            $content .= html_writer::end_tag('h5');
+            $content .= html_writer::end_tag('b');
         }
     }
 
     return $content;
 }
 
+/**
+ * @param $quizattempts
+ * @param $quiz
+ *
+ * @return html_table
+ * @throws coding_exception
+ */
 function local_ucl_tools_printquizattemptstable($quizattempts, $quiz) {
     global $CFG, $DB, $OUTPUT;
 
@@ -98,6 +125,9 @@ function local_ucl_tools_printquizattemptstable($quizattempts, $quiz) {
     //html_writer::link(new moodle_url($returnurl, array('unsuspend'=>$user->id, 'sesskey'=>sesskey())), html_writer::empty_tag('img', array('src'=>$OUTPUT->pix_url('t/show'), 'alt'=>$strunsuspend, 'class'=>'iconsmall')), array('title'=>$strunsuspend));
 }
 
+/**
+ * @param $attemptid
+ */
 function local_ucl_tools_updatequizattempt($attemptid) {
     global $DB;
 

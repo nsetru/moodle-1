@@ -40,3 +40,4 @@ $string['search'] = 'Search';
 $string['updatequiz'] = 'Update quiz attempt state';
 $string['stateabandoned'] = 'Never submitted';
 $string['viewprofile'] = "Click to view user's profile";
+$string['viewcourse'] = 'Click to view course';
