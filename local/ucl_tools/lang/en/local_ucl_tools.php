@@ -23,11 +23,15 @@
  * @license http://www.ucl.ac.uk
  */
 
-$string['pluginname'] = 'UCL Tools';
+$string['pluginname'] = 'UCL tools';
+
+// menu and sub-menu names in site administration block
+$string['ucltools'] = 'UCL tools';
+$string['quizreset'] = 'Reset quiz attempts';
 
 // quiz_reset forms
 $string['courseshortname'] = 'Course shortname';
-$string['courseshortname_help'] = "<p>Enter course shortname and click 'Search' button.</p> <p> This lists all available quizzes in course with attempts stuck in 'Never submitted' state</p>";
+$string['courseshortname_help'] = "<p>Enter course shortname and click 'Search' button.</p> <p> This lists all quiz attempts stuck in 'Never submitted' state for each quiz activity in a course</p>";
 $string['search'] = 'Search';
 
 // quiz tables

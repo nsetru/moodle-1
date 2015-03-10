@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Add UCL Tools menu and sub-menus within site-administration block
+ * Add UCL tools menu and sub-menus within site-administration block
  *
  * @package local_ucl_tools
  * @subpackage  ucl_tools
@@ -23,6 +23,6 @@
  * @license http://www.ucl.ac.uk
  */
 
-$ADMIN->add('root', new admin_category('ucl_tools', 'UCL Tools'));
-$ADMIN->add('ucl_tools', new admin_externalpage('quiz_reset', 'Reset Quiz Attempts',
+$ADMIN->add('root', new admin_category('ucl_tools', get_string('ucltools', 'local_ucl_tools')));
+$ADMIN->add('ucl_tools', new admin_externalpage('quiz_reset', get_string('quizreset', 'local_ucl_tools'),
     $CFG->wwwroot.'/local/ucl_tools/quiz_reset/index.php'));
