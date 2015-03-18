@@ -937,6 +937,8 @@ function glossary_get_available_formats() {
                     $gf->popupformatname = $format;
                     $gf->visible = 1;
                     $DB->insert_record("glossary_formats",$gf);
+                } else {
+                    glossary_set_visible_tabs($rec);
                 }
             }
         }
@@ -3134,4 +3136,37 @@ function glossary_page_type_list($pagetype, $parentcontext, $currentcontext) {
         'mod-glossary-view'=>get_string('page-mod-glossary-view', 'glossary'),
         'mod-glossary-edit'=>get_string('page-mod-glossary-edit', 'glossary'));
     return $module_pagetype;
+}
+
+function glossary_get_all_tabs() {
+
+    return array (
+        standard => get_string('standardview', 'glossary'),
+        author => get_string('authorview', 'glossary'),
+        category => get_string('categoryview', 'glossary'),
+        date => get_string('dateview', 'glossary')
+    );
+}
+
+function glossary_set_visible_tabs($glossaryformat) {
+    global $DB;
+
+    $showtabs = '';
+    switch($glossaryformat->name) {
+        case continuous:
+            $showtabs = 'standard,category,date';
+            break;
+        case dictionary:
+            $showtabs = 'standard';
+            break;
+        case fullwithoutauthor:
+            $showtabs = 'standard,category,date';
+            break;
+        default:
+            break;
+    }
+
+    if(!empty($showtabs)) {
+        $DB->set_field('glossary_formats', 'showtabs', $showtabs, array('id' => $glossaryformat->id));
+    }
 }

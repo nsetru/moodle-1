@@ -79,6 +79,7 @@ $string['cnfshowgroup'] = 'Specify if the group break should be shown or not.';
 $string['cnfsortkey'] = 'Select the sorting key by default.';
 $string['cnfsortorder'] = 'Select the sorting order by default.';
 $string['cnfstudentcanpost'] = 'Define if the students can or cannot post entries by default';
+$string['cnftabs'] = 'Select visible tabs for this glossary format';
 $string['comment'] = 'Comment';
 $string['commentdeleted'] = 'The comment has been deleted.';
 $string['comments'] = 'Comments';
