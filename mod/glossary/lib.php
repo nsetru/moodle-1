@@ -937,7 +937,9 @@ function glossary_get_available_formats() {
                     $gf->popupformatname = $format;
                     $gf->visible = 1;
                     $DB->insert_record("glossary_formats",$gf);
-                } else {
+                }
+
+                if(isset($rec->showtabs) and empty($rec->showtabs)) {
                     glossary_set_visible_tabs($rec);
                 }
             }
@@ -3151,7 +3153,6 @@ function glossary_get_all_tabs() {
 function glossary_set_visible_tabs($glossaryformat) {
     global $DB;
 
-    $showtabs = '';
     switch($glossaryformat->name) {
         case continuous:
             $showtabs = 'standard,category,date';
@@ -3163,10 +3164,9 @@ function glossary_set_visible_tabs($glossaryformat) {
             $showtabs = 'standard,category,date';
             break;
         default:
+            $showtabs = 'standard,author,category,date';
             break;
     }
 
-    if(!empty($showtabs)) {
-        $DB->set_field('glossary_formats', 'showtabs', $showtabs, array('id' => $glossaryformat->id));
-    }
+    $DB->set_field('glossary_formats', 'showtabs', $showtabs, array('id' => $glossaryformat->id));
 }

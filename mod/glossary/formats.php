@@ -259,7 +259,7 @@ echo '<table width="90%" align="center" class="generalbox">';
         // Get all glossary tabs.
         $glossarytabs = glossary_get_all_tabs();
         // Get visible into array.
-        $visibletabs = preg_split('/,/', $format->showtabs, -1, PREG_SPLIT_NO_EMPTY);
+        $visibletabs = preg_split('/,/', $displayformat->showtabs, -1, PREG_SPLIT_NO_EMPTY);
         $size = min(10, count($visibletabs));
         ?>
         <select id="visibletabs" name="visibletabs[]" size="<?php $size ?>" multiple="multiple">

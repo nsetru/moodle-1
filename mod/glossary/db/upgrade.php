@@ -63,14 +63,14 @@ function xmldb_glossary_upgrade($oldversion) {
 
         // Define field showtabs to be added to glossary_formats
         $table = new xmldb_table('glossary_formats');
-        $field = new xmldb_field('showtabs', XMLDB_TYPE_CHAR, '100', null, XMLDB_NOTNULL, null, 'standard,category,date,author','showgroup');
+        $field = new xmldb_field('showtabs', XMLDB_TYPE_CHAR, '100', null, null, null, null,'showgroup');
 
         // Conditionally launch add field showtabs
         if (!$dbman->field_exists($table, $field)) {
             $dbman->add_field($table, $field);
         }
 
-        // glossary savepoint reached
+        // Glossary savepoint reached
         upgrade_mod_savepoint(true, 2013110501, 'glossary');
     }
 
