@@ -42,7 +42,7 @@ if ( $mode == 'visible' and confirm_sesskey()) {
     $displayformat->sortkey     = $form->sortkey;
     $displayformat->sortorder   = $form->sortorder;
 
-    // Extract visible tabs from array into comma separated list
+    // Extract visible tabs from array into comma separated list.
     $visibletabs = implode(',', $form->visibletabs);
     $displayformat->showtabs = $visibletabs;
 

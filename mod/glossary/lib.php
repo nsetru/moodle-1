@@ -3145,6 +3145,11 @@ function glossary_page_type_list($pagetype, $parentcontext, $currentcontext) {
     return $module_pagetype;
 }
 
+/**
+ * Return list of all glossary tabs
+ * @return array
+ * @throws coding_exception
+ */
 function glossary_get_all_tabs() {
 
     return array (
@@ -3155,6 +3160,10 @@ function glossary_get_all_tabs() {
     );
 }
 
+/**
+ * Set 'showtabs' value for glossary formats
+ * @param $glossaryformat
+ */
 function glossary_set_visible_tabs($glossaryformat) {
     global $DB;
 
