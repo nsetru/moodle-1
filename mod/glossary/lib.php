@@ -38,6 +38,11 @@ define("GLOSSARY_IMPORT_VIEW", 5);
 define("GLOSSARY_EXPORT_VIEW", 6);
 define("GLOSSARY_APPROVAL_VIEW", 7);
 
+define('GLOSSARY_STANDARD', 'standard');
+define('GLOSSARY_AUTHOR', 'author');
+define('GLOSSARY_CATEGORY', 'category');
+define('GLOSSARY_DATE', 'date');
+
 /// STANDARD FUNCTIONS ///////////////////////////////////////////////////////////
 /**
  * @global object
@@ -939,7 +944,7 @@ function glossary_get_available_formats() {
                     $DB->insert_record("glossary_formats",$gf);
                 }
 
-                if(isset($rec->showtabs) and empty($rec->showtabs)) {
+                if(is_null($rec->showtabs)) {
                     glossary_set_visible_tabs($rec);
                 }
             }
@@ -3143,10 +3148,10 @@ function glossary_page_type_list($pagetype, $parentcontext, $currentcontext) {
 function glossary_get_all_tabs() {
 
     return array (
-        standard => get_string('standardview', 'glossary'),
-        author => get_string('authorview', 'glossary'),
-        category => get_string('categoryview', 'glossary'),
-        date => get_string('dateview', 'glossary')
+        GLOSSARY_STANDARD => get_string('standardview', 'glossary'),
+        GLOSSARY_AUTHOR => get_string('authorview', 'glossary'),
+        GLOSSARY_CATEGORY => get_string('categoryview', 'glossary'),
+        GLOSSARY_DATE => get_string('dateview', 'glossary')
     );
 }
 

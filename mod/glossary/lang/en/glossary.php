@@ -281,6 +281,7 @@ $string['studentcanpost'] = 'Students can add entries';
 $string['totalentries'] = 'Total entries';
 $string['usedynalink'] = 'Automatically link glossary entries';
 $string['usedynalink_help'] = 'If site-wide glossary auto-linking has been enabled by an administrator and this setting is enabled, the "Add a new entry" form includes the option to automatically link the entry wherever the concept words and phrases appear throughout the rest of the course.';
+$string['visibletabs'] = 'Visible tabs';
 $string['waitingapproval'] = 'Waiting approval';
 $string['warningstudentcapost'] = '(Applies only if the glossary is not the main one)';
 $string['withauthor'] = 'Concepts with author';

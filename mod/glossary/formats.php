@@ -253,12 +253,12 @@ echo '<table width="90%" align="center" class="generalbox">';
     </td>
 </tr>
 <tr >
-    <td align="right" width="20%"><label for="visibletabs">Visible tabs</label></td>
+    <td align="right" width="20%"><label for="visibletabs"><?php print_string("visibletabs", "glossary"); ?></label></td>
     <td>
         <?php
         // Get all glossary tabs.
         $glossarytabs = glossary_get_all_tabs();
-        // Get visible into array.
+        // Extract showtabs value in an array.
         $visibletabs = preg_split('/,/', $displayformat->showtabs, -1, PREG_SPLIT_NO_EMPTY);
         $size = min(10, count($visibletabs));
         ?>
