@@ -3168,13 +3168,13 @@ function glossary_set_visible_tabs($glossaryformat) {
     global $DB;
 
     switch($glossaryformat->name) {
-        case continuous:
+        case 'continuous':
             $showtabs = 'standard,category,date';
             break;
-        case dictionary:
+        case 'dictionary':
             $showtabs = 'standard';
             break;
-        case fullwithoutauthor:
+        case 'fullwithoutauthor':
             $showtabs = 'standard,category,date';
             break;
         default:
