@@ -38,11 +38,6 @@ define("GLOSSARY_IMPORT_VIEW", 5);
 define("GLOSSARY_EXPORT_VIEW", 6);
 define("GLOSSARY_APPROVAL_VIEW", 7);
 
-define('GLOSSARY_STANDARD', 'standard');
-define('GLOSSARY_AUTHOR', 'author');
-define('GLOSSARY_CATEGORY', 'category');
-define('GLOSSARY_DATE', 'date');
-
 /// STANDARD FUNCTIONS ///////////////////////////////////////////////////////////
 /**
  * @global object
@@ -942,10 +937,6 @@ function glossary_get_available_formats() {
                     $gf->popupformatname = $format;
                     $gf->visible = 1;
                     $DB->insert_record("glossary_formats",$gf);
-                }
-
-                if(is_null($rec->showtabs)) {
-                    glossary_set_visible_tabs($rec);
                 }
             }
         }
@@ -3143,44 +3134,4 @@ function glossary_page_type_list($pagetype, $parentcontext, $currentcontext) {
         'mod-glossary-view'=>get_string('page-mod-glossary-view', 'glossary'),
         'mod-glossary-edit'=>get_string('page-mod-glossary-edit', 'glossary'));
     return $module_pagetype;
-}
-
-/**
- * Return list of all glossary tabs
- * @return array
- * @throws coding_exception
- */
-function glossary_get_all_tabs() {
-
-    return array (
-        GLOSSARY_STANDARD => get_string('standardview', 'glossary'),
-        GLOSSARY_AUTHOR => get_string('authorview', 'glossary'),
-        GLOSSARY_CATEGORY => get_string('categoryview', 'glossary'),
-        GLOSSARY_DATE => get_string('dateview', 'glossary')
-    );
-}
-
-/**
- * Set 'showtabs' value for glossary formats
- * @param $glossaryformat
- */
-function glossary_set_visible_tabs($glossaryformat) {
-    global $DB;
-
-    switch($glossaryformat->name) {
-        case 'continuous':
-            $showtabs = 'standard,category,date';
-            break;
-        case 'dictionary':
-            $showtabs = 'standard';
-            break;
-        case 'fullwithoutauthor':
-            $showtabs = 'standard,category,date';
-            break;
-        default:
-            $showtabs = 'standard,author,category,date';
-            break;
-    }
-
-    $DB->set_field('glossary_formats', 'showtabs', $showtabs, array('id' => $glossaryformat->id));
 }
