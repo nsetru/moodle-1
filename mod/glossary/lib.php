@@ -2998,7 +2998,8 @@ function glossary_extend_navigation($navigation, $course, $module, $cm) {
 
     $glossarytabs = $DB->get_field('glossary_formats', 'showtabs', array('name' => $module->displayformat));
     // Get visible tabs for the format and check if the menu needs to be displayed.
-    $showtabs = preg_split('/,/', $glossarytabs, -1, PREG_SPLIT_NO_EMPTY);
+    // $showtabs = preg_split('/,/', $glossarytabs, -1, PREG_SPLIT_NO_EMPTY);
+    $showtabs = glossary_get_visible_tabs($glossarytabs);
 
     foreach ($showtabs as $showtabkey => $showtabvalue) {
 
@@ -3173,7 +3174,7 @@ function glossary_page_type_list($pagetype, $parentcontext, $currentcontext) {
 function glossary_get_all_tabs() {
 
     return array (
-        GLOSSARY_STANDARD => get_string('standardview', 'glossary'),
+        //GLOSSARY_STANDARD => get_string('standardview', 'glossary'),
         GLOSSARY_AUTHOR => get_string('authorview', 'glossary'),
         GLOSSARY_CATEGORY => get_string('categoryview', 'glossary'),
         GLOSSARY_DATE => get_string('dateview', 'glossary')
@@ -3203,4 +3204,10 @@ function glossary_set_default_visible_tabs($glossaryformat) {
     }
 
     $DB->set_field('glossary_formats', 'showtabs', $showtabs, array('id' => $glossaryformat->id));
+}
+
+function glossary_get_visible_tabs($tabstring) {
+    $showtabs = preg_split('/,/', $tabstring, -1, PREG_SPLIT_NO_EMPTY);
+
+    return $showtabs;
 }

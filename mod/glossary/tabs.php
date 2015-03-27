@@ -21,7 +21,8 @@
     }
 
     // Get visible tabs for the format and check tab needs to be displayed.
-    $dt = preg_split('/,/', $dp->showtabs, -1, PREG_SPLIT_NO_EMPTY);
+    // $dt = preg_split('/,/', $dp->showtabs, -1, PREG_SPLIT_NO_EMPTY);
+    $dt = glossary_get_visible_tabs($dp->showtabs);
 
     if (in_array(GLOSSARY_STANDARD, $dt)) {
         $browserow[] = new tabobject(GLOSSARY_STANDARD_VIEW,

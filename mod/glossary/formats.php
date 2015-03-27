@@ -44,7 +44,7 @@ if ( $mode == 'visible' and confirm_sesskey()) {
 
     // Extract visible tabs from array into comma separated list.
     $visibletabs = implode(',', $form->visibletabs);
-    $displayformat->showtabs = $visibletabs;
+    $displayformat->showtabs = 'standard,'.$visibletabs;
 
     $DB->update_record("glossary_formats",$displayformat);
     redirect("$CFG->wwwroot/$CFG->admin/settings.php?section=modsettingglossary#glossary_formats_header");
@@ -259,7 +259,8 @@ echo '<table width="90%" align="center" class="generalbox">';
         // Get all glossary tabs.
         $glossarytabs = glossary_get_all_tabs();
         // Extract showtabs value in an array.
-        $visibletabs = preg_split('/,/', $displayformat->showtabs, -1, PREG_SPLIT_NO_EMPTY);
+        // $visibletabs = preg_split('/,/', $displayformat->showtabs, -1, PREG_SPLIT_NO_EMPTY);
+        $visibletabs = glossary_get_visible_tabs($displayformat->showtabs);
         $size = min(10, count($glossarytabs));
         ?>
     <select id="visibletabs" name="visibletabs[]" size="<?php echo $size ?>" multiple="multiple">
