@@ -2765,7 +2765,10 @@ class assign {
         }
 
         $last = false;
+        // -- niv
         $userid = $useridlist[$rownum];
+        //$userid = $userid;
+        // -- niv
         if ($rownum == count($useridlist) - 1) {
             $last = true;
         }
